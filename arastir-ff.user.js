@@ -78,7 +78,7 @@ window.firstTime = function(){
 $( document ).ready(function() {
 
 	if($('#settings-tabs').length){
-		$('#settings-tabs').append('<li><a href="#arastir" onclick="arastirConfig();">araştır++</a>');
+		$('#settings-tabs').append('<li><a href="#arastir" onclick="arastirConfig();">araştır++</a></li>');
 	}
 
 	if($('#topic-research-menu').length){
