@@ -86,7 +86,7 @@ $( document ).ready(function() {
 			var baslik = $('h1#title span[itemprop="name"]').text();
 			var itemStyle;
 			if(v.icon.length)
-				itemStyle = 'background: url(\'' + v.icon + '\') no-repeat scroll left top rgba(0, 0, 0, 0); display: inline-block; min-height: 16px; min-width: 16px; vertical-align: middle; margin-right: 8px;';
+				itemStyle = 'background: url(\'' + v.icon + '\') no-repeat scroll left top rgba(0, 0, 0, 0); background-size: 16px 16px; display: inline-block; min-height: 16px; min-width: 16px; vertical-align: middle; margin-right: 8px;';
 			$('.sub-title-menu .dropdown-menu.toggles-menu').append('<li><a href="' + v.url + encodeURIComponent(baslik) + '" target="_blank"><span style="' + itemStyle + '"></span>' + v.siteName + '</a></li>');
 		});
 	}
