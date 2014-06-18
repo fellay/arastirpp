@@ -10,7 +10,7 @@
 
 var localStorageName = 'arastirppdata';
 
-window.arastirConfig = function(){
+unsafeWindow.arastirConfig = function(){
 	$('li.active').removeClass('active');
 	$('#settings-tabs>li:last').addClass('active');
 	$('#settings-tabs').after('<div id="arastirppdiv"><fieldset><legend>araştır++ sitelerim</legend></fieldset></div>');
@@ -24,11 +24,11 @@ window.arastirConfig = function(){
 	$('#arastirppdiv>fieldset').after(' <button class="primary" onclick="gogogo();">kaydet!</button>');
 }
 
-window.delSite = function(k){
+unsafeWindow.delSite = function(k){
 	$('#arastirppdiv>fieldset>div:eq(' + k + ')>input').val('');
 }
 
-window.gogogo = function(){
+unsafeWindow.gogogo = function(){
 	var thisIsWhatToSave = [];
 	$.each($('#arastirppdiv>fieldset>div'), function(k, v){
 		var siteName = $(this).find('input').eq(0).val().trim();
@@ -48,14 +48,14 @@ window.gogogo = function(){
 	}, 3500);
 }
 
-window.addNewSiteForm = function(){
+unsafeWindow.addNewSiteForm = function(){
 	var s = parseInt($('.siteFormNo:last').text())+1;
 	$('#arastirppdiv>fieldset').append('<div data-arastirpp="' + (s-1) + '"><label class="siteFormNo">' + s + '</label> <input style="width:80px;" type="text" value="" placeholder="site adı" /> <input style="width:220px;" type="text" value="" placeholder="site url\'i" /> <input style="width:220px;" type="text" value="" placeholder="icon url\'i" /></div>');
 	$('button#dahaSiteEkleButton').remove();
 	$('#arastirppdiv>fieldset>div:last').append(' <button id="dahaSiteEkleButton" onclick="addNewSiteForm();">daha</button>');
 }
 
-window.getDefaultArastirSites = function(){
+unsafeWindow.getDefaultArastirSites = function(){
 	return [
 				{siteName: 'vikipedi', url: 'http://tr.wikipedia.org/w/index.php?title=%C3%96zel:Ara&fulltext=Ara&search=', icon : 'http://tr.wikipedia.org/favicon.ico' },
 				{siteName: 'wikipedia', url: 'http://en.wikipedia.org/wiki/Special:Search?fulltext=Search&search=', icon : 'http://en.wikipedia.org/favicon.ico' },
@@ -64,11 +64,11 @@ window.getDefaultArastirSites = function(){
 		];
 }
 
-window.getStoredSites = function(){
+unsafeWindow.getStoredSites = function(){
 	return JSON.parse(localStorage.getItem(localStorageName));
 }
 
-window.firstTime = function(){
+unsafeWindow.firstTime = function(){
 	if(localStorage.getItem(localStorageName) == null)
 		localStorage.setItem(localStorageName, JSON.stringify(getDefaultArastirSites()));
 }
