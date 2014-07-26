@@ -7,6 +7,7 @@
 // @match     https://*.eksisozluk.com/*
 // @version     0.2
 // ==/UserScript==
+
 var localStorageName = 'arastirppdata';
 
 unsafeWindow.arastirConfig = function(){
@@ -69,12 +70,12 @@ unsafeWindow.getStoredSites = function(){
 	return JSON.parse(localStorage.getItem(localStorageName));
 }
 
-window.firstTime = function(){
+unsafeWindow.firstTime = function(){
 	if(localStorage.getItem(localStorageName) == null)
 		localStorage.setItem(localStorageName, JSON.stringify(getDefaultArastirSites()));
 }
 
-window.togglearastirpplist = function(){
+unsafeWindow.togglearastirpplist = function(){
 	$('#arastirpplist').toggle();
 }
 
