@@ -23,7 +23,7 @@ unsafeWindow.arastirConfig = function(){
 	$('#arastirppdiv>fieldset').after(' <button class="primary" onclick="gogogo();">kaydet!</button>');
 }
 
-unsafeunsafeWindow.delSite = function(k){
+unsafeWindow.delSite = function(k){
 	$('#arastirppdiv>fieldset>div:eq(' + k + ')>input').val('');
 }
 
