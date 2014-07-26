@@ -7,7 +7,6 @@
 // @match     https://*.eksisozluk.com/*
 // @version     0.2
 // ==/UserScript==
-
 var localStorageName = 'arastirppdata';
 
 unsafeWindow.arastirConfig = function(){
@@ -24,7 +23,7 @@ unsafeWindow.arastirConfig = function(){
 	$('#arastirppdiv>fieldset').after(' <button class="primary" onclick="gogogo();">kaydet!</button>');
 }
 
-unsafeWindow.delSite = function(k){
+unsafeunsafeWindow.delSite = function(k){
 	$('#arastirppdiv>fieldset>div:eq(' + k + ')>input').val('');
 }
 
@@ -57,10 +56,12 @@ unsafeWindow.addNewSiteForm = function(){
 
 unsafeWindow.getDefaultArastirSites = function(){
 	return [
-				{siteName: 'vikipedi', url: 'http://tr.wikipedia.org/w/index.php?title=%C3%96zel:Ara&fulltext=Ara&search=', icon : 'http://tr.wikipedia.org/favicon.ico' },
-				{siteName: 'wikipedia', url: 'http://en.wikipedia.org/wiki/Special:Search?fulltext=Search&search=', icon : 'http://en.wikipedia.org/favicon.ico' },
-				{siteName: 'imdb', url: 'http://us.imdb.com/find?q=', icon : 'http://www.imdb.com/favicon.ico' },
-				{siteName: 'youtube', url: 'http://www.youtube.com/results?search_query=', icon : 'http://www.youtube.com/favicon.ico' }
+				{siteName: 'google', url: 'https://www.google.com.tr/search?q=', icon: 'https://www.google.com.tr/favicon.ico'},
+				{siteName: 'tureng', url: 'http://tureng.com/search/', icon: 'http://tureng.com/favicon.ico'},
+				{siteName: 'vikipedi', url: 'http://tr.wikipedia.org/w/index.php?title=%C3%96zel:Ara&fulltext=Ara&search=', icon: 'http://tr.wikipedia.org/favicon.ico' },
+				{siteName: 'wikipedia', url: 'http://en.wikipedia.org/wiki/Special:Search?fulltext=Search&search=', icon: 'http://en.wikipedia.org/favicon.ico' },
+				{siteName: 'imdb', url: 'http://us.imdb.com/find?q=', icon: 'http://www.imdb.com/favicon.ico' },
+				{siteName: 'youtube', url: 'http://www.youtube.com/results?search_query=', icon: 'http://www.youtube.com/favicon.ico' }
 		];
 }
 
@@ -68,12 +69,12 @@ unsafeWindow.getStoredSites = function(){
 	return JSON.parse(localStorage.getItem(localStorageName));
 }
 
-unsafeWindow.firstTime = function(){
+window.firstTime = function(){
 	if(localStorage.getItem(localStorageName) == null)
 		localStorage.setItem(localStorageName, JSON.stringify(getDefaultArastirSites()));
 }
 
-unsafeWindow.togglearastirpplist = function(){
+window.togglearastirpplist = function(){
 	$('#arastirpplist').toggle();
 }
 
@@ -97,6 +98,8 @@ $( document ).ready(function() {
 			$('#arastirpplist').append('<li><a href="' + v.url + encodeURIComponent(baslik) + '" target="_blank"><span style="' + itemStyle + '"></span>' + v.siteName + '</a></li>');
 		});
 	}
+	
+	
 
 });
 
