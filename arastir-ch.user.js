@@ -81,17 +81,20 @@ unsafeWindow.togglearastirpplist = function(){
 $( document ).ready(function() {
 
 	if($('#settings-tabs').length){
-		$('#settings-tabs').append('<li><a href="#arastir" onclick="arastirConfig();">araştır++</a></li>');
+		$('#settings-tabs').append('<li><a href="#arastir" onclick="arastirConfig();">araştır++</a>');
 	}
 
-	if($('#topic-research-menu').length){
+	if($('.sub-title-menu').length){
 		firstTime();
+
+		$('#topic-share-menu').after('<div id="arastirpptogglediv" class="dropdown"><a id="arastirpptogglelink" onclick="togglearastirpplist();" class="dropdown-toggle">araştır</a><ul id="arastirpplist" class="dropdown-menu toggles-menu "></ul></div>');
+
 		$.each(getStoredSites(), function(k, v){
 			var baslik = $('h1#title span[itemprop="name"]').text();
 			var itemStyle;
 			if(v.icon.length)
 				itemStyle = 'background: url(\'' + v.icon + '\') no-repeat scroll left top rgba(0, 0, 0, 0); background-size: 16px 16px; display: inline-block; min-height: 16px; min-width: 16px; vertical-align: middle; margin-right: 8px;';
-			$('.sub-title-menu .dropdown-menu.toggles-menu').append('<li><a href="' + v.url + encodeURIComponent(baslik) + '" target="_blank"><span style="' + itemStyle + '"></span>' + v.siteName + '</a></li>');
+			$('#arastirpplist').append('<li><a href="' + v.url + encodeURIComponent(baslik) + '" target="_blank"><span style="' + itemStyle + '"></span>' + v.siteName + '</a></li>');
 		});
 	}
 
