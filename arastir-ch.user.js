@@ -5,7 +5,7 @@
 // @description arastir linkleri geri dondu!
 // @match     https://eksisozluk.com/*
 // @match     https://*.eksisozluk.com/*
-// @version     0.1
+// @version     0.2
 // ==/UserScript==
 
 var localStorageName = 'arastirppdata';
@@ -73,6 +73,10 @@ unsafeWindow.firstTime = function(){
 		localStorage.setItem(localStorageName, JSON.stringify(getDefaultArastirSites()));
 }
 
+unsafeWindow.togglearastirpplist = function(){
+	$('#arastirpplist').toggle();
+}
+
 /* pisssssmi */
 $( document ).ready(function() {
 
@@ -91,4 +95,12 @@ $( document ).ready(function() {
 		});
 	}
 
+});
+
+$(document).click(function(event) { 
+    if(!$(event.target).closest('#arastirpptogglediv').length) {
+        if($('#arastirpplist').is(":visible")) {
+            $('#arastirpplist').hide();
+        }
+    }        
 });
