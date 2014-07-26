@@ -5,7 +5,7 @@
 // @description arastir linkleri geri dondu!
 // @include     https://eksisozluk.com/*
 // @include     https://*.eksisozluk.com/*
-// @version     0.1
+// @version     0.2
 // @grant       none
 // ==/UserScript==
 
@@ -58,10 +58,12 @@ window.addNewSiteForm = function(){
 
 window.getDefaultArastirSites = function(){
 	return [
-				{siteName: 'vikipedi', url: 'http://tr.wikipedia.org/w/index.php?title=%C3%96zel:Ara&fulltext=Ara&search=', icon : 'http://tr.wikipedia.org/favicon.ico' },
-				{siteName: 'wikipedia', url: 'http://en.wikipedia.org/wiki/Special:Search?fulltext=Search&search=', icon : 'http://en.wikipedia.org/favicon.ico' },
-				{siteName: 'imdb', url: 'http://us.imdb.com/find?q=', icon : 'http://www.imdb.com/favicon.ico' },
-				{siteName: 'youtube', url: 'http://www.youtube.com/results?search_query=', icon : 'http://www.youtube.com/favicon.ico' }
+				{siteName: 'google', url: 'https://www.google.com.tr/search?q=', icon: 'https://www.google.com.tr/favicon.ico'},
+				{siteName: 'tureng', url: 'http://tureng.com/search/', icon: 'http://tureng.com/favicon.ico'},
+				{siteName: 'vikipedi', url: 'http://tr.wikipedia.org/w/index.php?title=%C3%96zel:Ara&fulltext=Ara&search=', icon: 'http://tr.wikipedia.org/favicon.ico' },
+				{siteName: 'wikipedia', url: 'http://en.wikipedia.org/wiki/Special:Search?fulltext=Search&search=', icon: 'http://en.wikipedia.org/favicon.ico' },
+				{siteName: 'imdb', url: 'http://us.imdb.com/find?q=', icon: 'http://www.imdb.com/favicon.ico' },
+				{siteName: 'youtube', url: 'http://www.youtube.com/results?search_query=', icon: 'http://www.youtube.com/favicon.ico' }
 		];
 }
 
@@ -74,22 +76,40 @@ window.firstTime = function(){
 		localStorage.setItem(localStorageName, JSON.stringify(getDefaultArastirSites()));
 }
 
+window.togglearastirpplist = function(){
+	$('#arastirpplist').toggle();
+}
+
 /* pisssssmi */
 $( document ).ready(function() {
 
 	if($('#settings-tabs').length){
-		$('#settings-tabs').append('<li><a href="#arastir" onclick="arastirConfig();">araştır++</a></li>');
+		$('#settings-tabs').append('<li><a href="#arastir" onclick="arastirConfig();">araştır++</a>');
 	}
 
-	if($('#topic-research-menu').length){
+	if($('.sub-title-menu').length){
 		firstTime();
+
+		$('#topic-share-menu').after('<div id="arastirpptogglediv" class="dropdown"><a id="arastirpptogglelink" onclick="togglearastirpplist();" class="dropdown-toggle">araştır</a><ul id="arastirpplist" class="dropdown-menu toggles-menu "></ul></div>');
+
 		$.each(getStoredSites(), function(k, v){
 			var baslik = $('h1#title span[itemprop="name"]').text();
 			var itemStyle;
 			if(v.icon.length)
 				itemStyle = 'background: url(\'' + v.icon + '\') no-repeat scroll left top rgba(0, 0, 0, 0); background-size: 16px 16px; display: inline-block; min-height: 16px; min-width: 16px; vertical-align: middle; margin-right: 8px;';
-			$('.sub-title-menu .dropdown-menu.toggles-menu').append('<li><a href="' + v.url + encodeURIComponent(baslik) + '" target="_blank"><span style="' + itemStyle + '"></span>' + v.siteName + '</a></li>');
+			$('#arastirpplist').append('<li><a href="' + v.url + encodeURIComponent(baslik) + '" target="_blank"><span style="' + itemStyle + '"></span>' + v.siteName + '</a></li>');
 		});
 	}
+	
+	
 
 });
+
+$(document).click(function(event) { 
+    if(!$(event.target).closest('#arastirpptogglediv').length) {
+        if($('#arastirpplist').is(":visible")) {
+            $('#arastirpplist').hide();
+        }
+    }        
+});
+
